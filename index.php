@@ -14,8 +14,8 @@
             <p class="name">ГрумRoom</p>
         </div>
         <div class="menu flex">
-            <a href="#auth" class="menu">Регистрация</a>
-            <a href="#register" class="menu">Вход в личный кабинет</a>
+            <a href="#register" class="menu">Регистрация</a>
+            <a href="#auth" class="menu">Вход в личный кабинет</a>
         </div>
     </header>
     <main>
@@ -82,18 +82,18 @@
         </div>
         <div class="container-form flex">
             <div class="heading flex">
-                    <h3 class="title">Регистрация</h2>
+                    <h3 class="title" id="auth">Авторизация</h2>
             </div>
-            <form action="#" method="POST" class="flex" id="auth"> 
+            <form action="#" method="POST" class="flex"> 
                 <input type="text" name="login" placeholder="Введите логин" required>
                 <input type="password" name="password" placeholder="Введите пароль" required>
                 <input type="submit" value="ВОЙТИ">
             </form>
             <div class="heading flex">
-                <h3 class="title">Авторизация</h2>
+                <h3 class="title" id="register">Регистрация</h2>
             </div>
             <div class="container-form flex">
-                <form action="#" method="POST" class="flex" id="register"> 
+                <form action="#" method="POST" class="flex"> 
                     <input type="text" name="fio" placeholder="Введите ФИО" required>
                     <input type="text" name="login" placeholder="Введите логин" required>
                     <input type="email" name="email" placeholder="Введите Email" required>
