@@ -5,10 +5,9 @@
 }
 body{
     font-family: Arial, sans-serif;
-}
-main {
     background-color: #fcf4ff;
 }
+
 a {
 	color: black;
 	cursor: pointer;
@@ -90,7 +89,33 @@ div.container-request img{
     height: 300px;
     object-fit: cover;
 }
-
+.container-form.flex {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+form.flex {
+    flex-direction: column;
+}
+form.flex input{
+    margin-bottom: 10px;
+    padding: 10px 40px;
+    font-size: 16px;
+}
+p.agree {
+    margin: 10px;
+}
+input[type="submit"] {
+    background-color: #7a5984;
+    border: none;
+    color: white;
+    margin-top: 10px;
+}
+footer {
+    padding: 40px 0;
+    margin-top: 40px;
+    border-top: 2px solid black;
+    text-align: center;
+}
 /* личный кабинет */
 @media screen and (max-width: 375px){
     .flex{

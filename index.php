@@ -14,8 +14,8 @@
             <p class="name">ГрумRoom</p>
         </div>
         <div class="menu flex">
-            <a href="#" class="menu">Регистрация</a>
-            <a href="#" class="menu">Вход в личный кабинет</a>
+            <a href="#auth" class="menu">Регистрация</a>
+            <a href="#register" class="menu">Вход в личный кабинет</a>
         </div>
     </header>
     <main>
@@ -80,12 +80,37 @@
                 </div>
             </div>
         </div>
-        <div class="heading flex">
-                <h3 class="title">Регистрация</h2>
-        </div>
+        <div class="container-form flex">
+            <div class="heading flex">
+                    <h3 class="title">Регистрация</h2>
+            </div>
+            <form action="#" method="POST" class="flex" id="auth"> 
+                <input type="text" name="login" placeholder="Введите логин" required>
+                <input type="password" name="password" placeholder="Введите пароль" required>
+                <input type="submit" value="ВОЙТИ">
+            </form>
+            <div class="heading flex">
+                <h3 class="title">Авторизация</h2>
+            </div>
+            <div class="container-form flex">
+                <form action="#" method="POST" class="flex" id="register"> 
+                    <input type="text" name="fio" placeholder="Введите ФИО" required>
+                    <input type="text" name="login" placeholder="Введите логин" required>
+                    <input type="email" name="email" placeholder="Введите Email" required>
+                    <input type="password" name="password" placeholder="Введите пароль" required> 
+                    <input type="password" name="passwordCheck" placeholder="Повторите пароль" required>
+                    <p class="agree">
+                        <input type="checkbox" name="agree" required>
+                        Согласие на обработку персональных данных
+                    </p>
+                    <input type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
+                </form>
+            </div>
     </main>
     <footer>
-        
+        <p class="footer">Задание выполнено в рамках подготовки к Демонстрационному экзамену</p>
+        <p class="year">2021г.</p>
+
     </footer>
     <script src="js\index.js"></script>
 </body>
