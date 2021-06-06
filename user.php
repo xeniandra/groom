@@ -3,6 +3,11 @@
     include ("backend\connection.php");
     include ("backend\check_session.php");
     $queryCategories = mysqli_query($link, "SELECT `id_category`, `category` FROM `category`");
+    $idUser = $_SESSION['id_user'];
+    $queryApplicationsUser = mysqli_query($link, "SELECT `id_application`, `id_user`, `name_dog`, `description`, `id_category`, `status`, `time` FROM `applications` 
+    WHERE `id_user` = $idUser");
+
+    echo $_GET['message'];
 
 ?>
 <!DOCTYPE html>
@@ -37,35 +42,29 @@
                     <a onclick="fn_app_filtration ('Услуга оказана')" class="status">Услуга оказана</a>
                 </nav>
             <div class="container-request flex">
-
+<?php
+while($app = mysqli_fetch_assoc($queryApplicationsUser)){
+    $id_application = $app['id_application'];
+    $date = $app['time'];
+    $name_dog = $app['name_dog'];
+    $description = $app['description'];
+    $status = $app['status'];
+    $id_category = $app['id_category'];
+    $categories = mysqli_query($link, "SELECT `category` FROM `category` WHERE `id_category` = 1");
+    $category = mysqli_fetch_assoc($categories);
+    $categoryName = $category['category'];
+?>
                 <div class="request">
-                    <p class="date">Время: 21/05/2021</p>
-                    <p class="name-dog">Кличка: Бобик</p>
-                    <p class="description">Описание: Постригите Бобика, он зарос(</p>
-                    <p class="category">Категория: стрижка</p>
-                    <p class="status" id="status">Статус заявки: <b>Новая</b></p>
+                    <p class="date">Время: <?=$date?></p>
+                    <p class="name-dog">Кличка: <?=$name_dog?></p>
+                    <p class="description">Описание: <?=$description?></p>
+                    <p class="category">Категория: <?=$categoryName?></p>
+                    <p class="status" id="status">Статус заявки: <b><?=$status?></b></p>
+                    <a href="backend\del_application.php?idApp=<?=$id_application?>" class="deleteApp">Удалить заявку</a>
                 </div>
-                <div class="request">
-                    <p class="date">Время: 21/05/2021</p>
-                    <p class="name-dog">Кличка: Бобик</p>
-                    <p class="description">Описание: Постригите Бобика, он зарос(</p>
-                    <p class="category">Категория: стрижка</p>
-                    <p class="status" id="status">Статус заявки:<b>Обработка данных</b> </p>
-                </div>
-                <div class="request">
-                    <p class="date">Время: 21/05/2021</p>
-                    <p class="name-dog">Кличка: Бобик</p>
-                    <p class="description">Описание: Постригите Бобика, он зарос(</p>
-                    <p class="category">Категория: стрижка</p>
-                    <p class="status" id="status">Статус заявки: <b>Услуга оказана</b></p>
-                </div>
-                <div class="request">
-                    <p class="date">Время: 21/05/2021</p>
-                    <p class="name-dog">Кличка: Бобик</p>
-                    <p class="description">Описание: Постригите Бобика, он зарос(</p>
-                    <p class="category">Категория: стрижка</p>
-                    <p class="status" id="status">Статус заявки: <b>Новая</b></p>
-                </div>
+<?
+}
+?>
             </div>
         </div>
         <div class="container-form flex">
