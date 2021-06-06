@@ -8,3 +8,4 @@
 		document.querySelector("#" + e.target.id + " div.before").style.display = "block";
 		document.querySelector("#" + e.target.id + " div.after").style.display = "none";
 	}
+

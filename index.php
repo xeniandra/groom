@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    include ("backend\connection.php");
+    echo $_SESSION['login'];
+    echo $_SESSION['id_user'];
+    echo $_SESSION['role'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +22,11 @@
         </div>
         <div class="menu flex">
             <a href="#register" class="menu">Регистрация</a>
+            <?php if($_SESSION['login'] == true){ ?>
+            <a href="user.php" class="menu">Личный кабинет</a>
+            <?php } else{?>
             <a href="#auth" class="menu">Вход в личный кабинет</a>
+            <? } ?>
         </div>
     </header>
     <main>
@@ -81,23 +92,16 @@
             </div>
         </div>
         <div class="container-form flex">
-            <div class="heading flex">
-                    <h3 class="title" id="auth">Авторизация</h2>
-            </div>
-            <form action="#" method="POST" class="flex"> 
-                <input type="text" name="login" placeholder="Введите логин" required>
-                <input type="password" name="password" placeholder="Введите пароль" required>
-                <input type="submit" value="ВОЙТИ">
-            </form>
+
             <div class="heading flex">
                 <h3 class="title" id="register">Регистрация</h2>
             </div>
-            <div class="container-form flex">
-                <form action="#" method="POST" class="flex"> 
-                    <input type="text" name="fio" placeholder="Введите ФИО" required>
-                    <input type="text" name="login" placeholder="Введите логин" required>
+
+                <form action="backend\registration.php" method="POST" class="flex" id="reg"> 
+                    <input type="text" name="fio" pattern="[а-яА-ЯёЁ\-\ ]+$" placeholder="Введите ФИО" required>
+                    <input type="text" name="login" pattern="[a-zA-Z\-\ ]+$" placeholder="Введите логин" required>
                     <input type="email" name="email" placeholder="Введите Email" required>
-                    <input type="password" name="password" placeholder="Введите пароль" required> 
+                    <input type="password" name="password" placeholder="Введите пароль" required>
                     <input type="password" name="passwordCheck" placeholder="Повторите пароль" required>
                     <p class="agree">
                         <input type="checkbox" name="agree" required>
@@ -105,13 +109,31 @@
                     </p>
                     <input type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ">
                 </form>
-            </div>
+
+                <div class="heading flex">
+                    <h3 class="title" id="auth">Авторизация</h2>
+                </div>
+
+                <form action="backend\authorization.php" method="POST" class="flex"> 
+                    <input type="text" name="login" placeholder="Введите логин" required>
+                    <input type="password" name="password" placeholder="Введите пароль" required>
+                    <input type="submit" value="ВОЙТИ">
+                </form>
+        </div>
     </main>
+
     <footer>
         <p class="footer">Задание выполнено в рамках подготовки к Демонстрационному экзамену</p>
         <p class="year">2021г.</p>
-
     </footer>
+    
     <script src="js\index.js"></script>
+    <script>
+        // let password = document.querySelector("input[name=password]");
+        // let passwordCheck = document.querySelector("input[name=passwordCheck]");
+        // if(password != passwordCheck){
+        //     alert("")
+        // }
+    </script>
 </body>
 </html>
