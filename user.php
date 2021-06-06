@@ -73,7 +73,7 @@
                     <h3 class="title" id="auth">Создать заявку</h2>
             </div>
             <div class="container-form flex">
-                <form action="#" method="POST" class="flex" id="add"> 
+                <form enctype="multipart/form-data" action="backend\add_application.php" method="POST" class="flex" id="add"> 
                     <input type="text" name="name" placeholder="Кличка домашнего животного" required>
                     <input type="text" name="description" placeholder="Описание запрашиваемой работы" required>
                     <select name="category" id="">
@@ -85,7 +85,7 @@
 <? } ?>
                     </select>
                     <p>Загрузите фото питомца:</p>
-                    <input type="file" name="img" id="">
+                    <input type="file" name="image" id="">
                     <input type="submit" value="ОТПРАВИТЬ ЗАЯВКУ">
                 </form>
             </div>
