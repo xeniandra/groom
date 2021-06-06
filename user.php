@@ -4,8 +4,7 @@
     include ("backend\check_session.php");
     $queryCategories = mysqli_query($link, "SELECT `id_category`, `category` FROM `category`");
     $idUser = $_SESSION['id_user'];
-    $queryApplicationsUser = mysqli_query($link, "SELECT `id_application`, `id_user`, `name_dog`, `description`, `id_category`, `status`, `time` FROM `applications` 
-    WHERE `id_user` = $idUser");
+    $queryApplicationsUser = mysqli_query($link, "SELECT `id_application`, `id_user`, `name_dog`, `description`, `id_category`, `status`, `time` FROM `applications` WHERE `id_user` = $idUser ORDER BY `time` DESC");
 
     echo $_GET['message'];
 
@@ -60,7 +59,11 @@ while($app = mysqli_fetch_assoc($queryApplicationsUser)){
                     <p class="description">Описание: <?=$description?></p>
                     <p class="category">Категория: <?=$categoryName?></p>
                     <p class="status" id="status">Статус заявки: <b><?=$status?></b></p>
+<?php
+    if($status == 'Новая'){
+?>
                     <a href="backend\del_application.php?idApp=<?=$id_application?>" class="deleteApp">Удалить заявку</a>
+<?php } ?>
                 </div>
 <?
 }
@@ -73,8 +76,8 @@ while($app = mysqli_fetch_assoc($queryApplicationsUser)){
             </div>
             <div class="container-form flex">
                 <form enctype="multipart/form-data" action="backend\add_application.php" method="POST" class="flex" id="add"> 
-                    <input type="text" name="name" placeholder="Кличка домашнего животного" required>
-                    <input type="text" name="description" placeholder="Описание запрашиваемой работы" required>
+                    <input type="text" name="name" placeholder="Кличка питомца" required>
+                    <textarea name="description" placeholder="Описание работы" required rows="5"></textarea>
                     <select name="category" id="">
 <?php while($category = mysqli_fetch_assoc($queryCategories)){
     $idCategory = $category['id_category'];
@@ -84,7 +87,7 @@ while($app = mysqli_fetch_assoc($queryApplicationsUser)){
 <? } ?>
                     </select>
                     <p>Загрузите фото питомца:</p>
-                    <input type="file" name="image" id="">
+                    <input type="file" name="image" id="" required>
                     <input type="submit" value="ОТПРАВИТЬ ЗАЯВКУ">
                 </form>
             </div>

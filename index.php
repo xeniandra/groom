@@ -1,9 +1,9 @@
 <?php
     session_start();
     include ("backend\connection.php");
-    echo $_SESSION['login'];
-    echo $_SESSION['id_user'];
-    echo $_SESSION['role'];
+    $queryApplications = mysqli_query($link, "SELECT `id_application`, `id_user`, `name_dog`, `id_category`, `photo_before`, `photo_after`, `status`, `time` FROM `applications` WHERE `status` = 'Услуга оказана' ORDER BY `time` DESC LIMIT 4");
+    $queryApplicationsNumber = mysqli_query($link, "SELECT * FROM `applications` WHERE `status` = 'Услуга оказана'");
+    $applicationsNumber = mysqli_num_rows($queryApplicationsNumber);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,9 +22,15 @@
         </div>
         <div class="menu flex">
             <a href="#register" class="menu">Регистрация</a>
-            <?php if($_SESSION['login'] == true){ ?>
+            <?php if($_SESSION['login'] == true){ 
+                if($_SESSION['role'] == 2){?>
             <a href="user.php" class="menu">Личный кабинет</a>
-            <?php } else{?>
+            <?php }
+            else{?>
+                <a href="groom\index.php" class="menu">Личный кабинет</a>
+            <?}
+            } 
+            else{?>
             <a href="#auth" class="menu">Вход в личный кабинет</a>
             <? } ?>
         </div>
@@ -34,61 +40,38 @@
             <div class="heading flex">
                 <h3 class="title">Последние решенные заявки</h2>
             </div>
-                <h2 class="counter">Количестве оказанных услуг: 35</h3>
+                <h2 class="counter">Количестве оказанных услуг: <?=$applicationsNumber?></h3>
 
             <div class="container-request flex">
+<?php
+while ($app = mysqli_fetch_assoc($queryApplications)) {
+    $idApp = $app['id_application'];
+    $nameDog = $app['name_dog'];
+    $photoBefore = $app['photo_before'];
+    $photoAfter = $app['photo_after'];
+    $time = $app['time'];
+    $idCategory = $app['id_category'];
+    $queryCategory = mysqli_query($link, "SELECT `category` FROM `category` WHERE `id_category` = '$idCategory'");
+    $category = mysqli_fetch_assoc($queryCategory);
+    $nameCategory = $category['category'];
+?>
+
                 <div class="request">
-                    <p class="date">21/05/2021</p>
-                    <p class="name-dog">Бобик</p>
-                    <p class="category">Категория: стрижка</p>
-                    <div class="change-image" onmouseenter="fn_image_enter(event)" onmouseleave="fn_image_leave(event)" id="image_1">
+                    <p class="date"><?=$time?></p>
+                    <p class="name-dog"><?=$nameDog?></p>
+                    <p class="category">Категория: <?=$nameCategory?></p>
+                    <div class="change-image" onmouseenter="fn_image_enter(event)" onmouseleave="fn_image_leave(event)" id="image_<?=$idApp?>">
                         <div class="before" style="display:block;">
-                            <img src="public\dog1b.jpg" alt="before">
+                            <img src="..\<?=$photoBefore?>" alt="before">
                         </div>
                         <div class="after" style="display:none;">
-                            <img src="public\dog1a.jpg" alt="after">
+                            <img src="..\<?=$photoAfter?>" alt="after">
                         </div>
                     </div>
                 </div>
-                <div class="request">
-                    <p class="date">21/05/2021</p>
-                    <p class="name-dog">Бобик</p>
-                    <p class="category">Категория: стрижка</p>
-                    <div class="change-image" onmouseenter="fn_image_enter(event)" onmouseleave="fn_image_leave(event)" id="image_2">
-                        <div class="before" style="display:block;">
-                            <img src="public\dog1b.jpg" alt="before">
-                        </div>
-                        <div class="after" style="display:none;">
-                            <img src="public\dog1a.jpg" alt="after">
-                        </div>
-                    </div>
-                </div>
-                <div class="request">
-                    <p class="date">21/05/2021</p>
-                    <p class="name-dog">Бобик</p>
-                    <p class="category">Категория: стрижка</p>
-                    <div class="change-image" onmouseenter="fn_image_enter(event)" onmouseleave="fn_image_leave(event)" id="image_3">
-                        <div class="before" style="display:block;">
-                            <img src="public\dog1b.jpg" alt="before">
-                        </div>
-                        <div class="after" style="display:none;">
-                            <img src="public\dog1a.jpg" alt="after">
-                        </div>
-                    </div>
-                </div>
-                <div class="request">
-                    <p class="date">21/05/2021</p>
-                    <p class="name-dog">Бобик</p>
-                    <p class="category">Категория: стрижка</p>
-                    <div class="change-image" onmouseenter="fn_image_enter(event)" onmouseleave="fn_image_leave(event)" id="image_4">
-                        <div class="before" style="display:block;">
-                            <img src="public\dog1b.jpg" alt="before">
-                        </div>
-                        <div class="after" style="display:none;">
-                            <img src="public\dog1a.jpg" alt="after">
-                        </div>
-                    </div>
-                </div>
+<?php
+}
+?>
             </div>
         </div>
         <div class="container-form flex">
