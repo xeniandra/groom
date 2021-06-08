@@ -80,12 +80,21 @@ while ($app = mysqli_fetch_assoc($queryApplications)) {
                 <h3 class="title" id="register">Регистрация</h2>
             </div>
 
-                <form action="backend\registration.php" method="POST" class="flex" id="reg"> 
+                <form action="backend\registration.php" method="POST" class="flex" onsubmit="return fn_register();" id="reg"> 
+<?php 
+if($_GET['messageLog'] || $_GET['messagePass']){
+?>
+                <p class="message"><?=$_GET['messageLog'];?></p>
+                <p class="message"><?=$_GET['messagePass'];?></p>
+<?php 
+}
+?>
                     <input type="text" name="fio" pattern="[а-яА-ЯёЁ\-\ ]+$" placeholder="Введите ФИО" required>
                     <input type="text" name="login" pattern="[a-zA-Z\-\ ]+$" placeholder="Введите логин" required>
                     <input type="email" name="email" placeholder="Введите Email" required>
                     <input type="password" name="password" placeholder="Введите пароль" required>
                     <input type="password" name="passwordCheck" placeholder="Повторите пароль" required>
+                    <p class="message" id="messagePass"></p>
                     <p class="agree">
                         <input type="checkbox" name="agree" required>
                         Согласие на обработку персональных данных
@@ -96,8 +105,14 @@ while ($app = mysqli_fetch_assoc($queryApplications)) {
                 <div class="heading flex">
                     <h3 class="title" id="auth">Авторизация</h2>
                 </div>
-                <form action="backend\authorization.php" method="POST" class="flex"> 
+                <form action="backend\authorization.php" method="POST" class="flex">
+<?php 
+    if($_GET['messageLog']){
+?>
                     <p class="message"><?=$_GET['message'];?></p>
+<?php 
+}
+?>
                     <input type="text" name="login" placeholder="Введите логин" required>
                     <input type="password" name="password" placeholder="Введите пароль" required>
                     <input type="submit" value="ВОЙТИ">
@@ -111,12 +126,20 @@ while ($app = mysqli_fetch_assoc($queryApplications)) {
     </footer>
     
     <script src="js\index.js"></script>
-    <script>
-        // let password = document.querySelector("input[name=password]");
-        // let passwordCheck = document.querySelector("input[name=passwordCheck]");
-        // if(password != passwordCheck){
-        //     alert("")
-        // }
-    </script>
+    <!-- <script>
+        function fn_register(){
+            let password = document.querySelector("input[name=password]").value;
+            let passwordCheck = document.querySelector("input[name=passwordCheck]").value;
+            if(password != passwordCheck){
+                document.queryElementById("messagePass").innerHTML = "Пароли не совпадают"
+                alert("Пароли не совпадают")
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        }
+    </script> -->
 </body>
 </html>
