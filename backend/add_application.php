@@ -52,6 +52,6 @@
     $category = $_POST['category'];
     $insertApp = mysqli_query($link, "INSERT INTO `applications` (`id_application`, `id_user`, `name_dog`, `description`, `id_category`, `photo_before`, `photo_after`, `status`, `time`) 
     VALUES (NULL, '$IdUser', '$name', '$description', '$category', '$path', NULL, 'Новая', NOW());");
-	header ("Location: ../user.php?message=Заявка создана");
+	header ("Location: ../user.php?message=Заявка создана#auth");
 	exit;
 ?>

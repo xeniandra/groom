@@ -5,9 +5,6 @@
     $queryCategories = mysqli_query($link, "SELECT `id_category`, `category` FROM `category`");
     $idUser = $_SESSION['id_user'];
     $queryApplicationsUser = mysqli_query($link, "SELECT `id_application`, `id_user`, `name_dog`, `description`, `id_category`, `status`, `time` FROM `applications` WHERE `id_user` = $idUser ORDER BY `time` DESC");
-
-    echo $_GET['message'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +28,10 @@
     </header>
     <main>
         <div class="container-main flex">
-            <div class="heading flex">
+            <div class="heading flex" id="app">
                 <h3 class="title">Мои заявки</h2>
             </div>
+            <p class="message"><?=$_GET['messageDel'];?></p>
             <nav class="filtration">
                     <a onclick="fn_app_filtration ()" class="status">Все</a> |
                     <a onclick="fn_app_filtration ('Новая')" class="status">Новые</a> |
@@ -76,6 +74,7 @@ while($app = mysqli_fetch_assoc($queryApplicationsUser)){
             </div>
             <div class="container-form flex">
                 <form enctype="multipart/form-data" action="backend\add_application.php" method="POST" class="flex" id="add"> 
+                    <p class="message"><?=$_GET['message'];?></p>
                     <input type="text" name="name" placeholder="Кличка питомца" required>
                     <textarea name="description" placeholder="Описание работы" required rows="5"></textarea>
                     <select name="category" id="">

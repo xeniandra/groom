@@ -35,7 +35,7 @@
     </header>
     <main>
         <div class="container-category flex">
-            <div class="heading flex">
+            <div class="heading flex" id="category">
                 <h3 class="title">Категории</h2>
             </div>
 <?php

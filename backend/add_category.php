@@ -10,6 +10,6 @@
     
     $nameCategory = $_POST['nameCategory'];
     $insertCategory = mysqli_query($link, "INSERT INTO `category` (`id_category`, `category`) VALUES (NULL, '$nameCategory');");
-	header ("Location: ../groom/index.php?message=Категория добавлена");
+	header ("Location: ../groom/index.php?message=Категория добавлена#category");
 	exit;
 ?>

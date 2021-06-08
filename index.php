@@ -96,8 +96,8 @@ while ($app = mysqli_fetch_assoc($queryApplications)) {
                 <div class="heading flex">
                     <h3 class="title" id="auth">Авторизация</h2>
                 </div>
-
                 <form action="backend\authorization.php" method="POST" class="flex"> 
+                    <p class="message"><?=$_GET['message'];?></p>
                     <input type="text" name="login" placeholder="Введите логин" required>
                     <input type="password" name="password" placeholder="Введите пароль" required>
                     <input type="submit" value="ВОЙТИ">

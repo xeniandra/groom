@@ -16,6 +16,11 @@ a {
 h3, h2{
     text-align: center;
 }
+p.message {
+    margin: 10px 0px;
+    color: #6c1b86;
+    font-size: 20px;
+}
 .flex{
     display: flex;
     justify-content: center;
